@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+    <div>
+        <h3>Here you can add a new information</h3>
+    </div>
+
+    <div>Диагнозы</div>
+    {{#diagnoses}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{diagnose}}</span>
+    </div>
+    {{/diagnoses}}
+
+    <div>Симптомы</div>
+    {{#symptomes}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{symptome}}</span>
+    </div>
+    {{/symptomes}}
+
+
+</body>
+</html>

@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+
+    <style>
+        html {
+            background-color: #b0d996;
+        }
+
+    </style>
+
 </head>
 <body>
-<div>Hello, {{name}}</div>
+<div>Прсто отвечайте "да" или "нет" на поставленные вопросы</div>
+
+<form method="post">
+    <h2>Беспокоит ли вас {{symptome}}?</h2>
+    <button type="submit" name="yes">Да</button>
+    <button type="submit" name="no">Нет</button>
+</form>
+
+<footer>
+    <a href="index">Вернуться на главную</a>
+</footer>
 </body>
 </html>

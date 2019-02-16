@@ -3,28 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+
+    <style>
+        html {
+            background-color: #b0d996;
+        }
+
+    </style>
+
 </head>
 <body>
-    <div>
-        <h3>Here you can add a new information</h3>
-    </div>
+<h1 align="center">Добавление информации</h1>
 
-    <div>Диагнозы</div>
-    {{#diagnoses}}
-    <div>
-        <b>{{id}}</b>
-        <span>{{diagnose}}</span>
-    </div>
-    {{/diagnoses}}
 
-    <div>Симптомы</div>
-    {{#symptomes}}
-    <div>
-        <b>{{id}}</b>
-        <span>{{symptome}}</span>
-    </div>
-    {{/symptomes}}
+<div>
+    <table border="1">
+        <h2>Диагнозы:</h2>
+        {{#diagnoses}}
+        <tr>
+            <td><b>{{id}}</b></td>
+            <td><span>{{diagnose}}</span></td>
+        </tr>
+        {{/diagnoses}}
+    </table>
 
+
+    <table border="1">
+        <h2>Симптномы:</h2>
+        {{#symptomes}}
+        <tr>
+            <td><b>{{id}}</b></td>
+            <td><span>{{symptome}}</span></td>
+        </tr>
+        {{/symptomes}}
+    </table>
+
+    <br>
+    <br>
+
+    <form method="post">
+        <input type="text" name="sym" placeholder="Введите симптом">
+        <button type="submit">Добавить</button>
+
+        <input type="text" name="text" placeholder="Введите диагноз">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+
+<footer>
+    <a href="index">Вернуться на главную</a>
+</footer>
 
 </body>
 </html>

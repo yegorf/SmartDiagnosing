@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Map;
 
 @Controller
@@ -60,21 +62,16 @@ public class TestController {
     }
 
 
-
-
-    //Iterable<Symptome> sym = symptomeRepo.findAll();
-    //Deque<Symptome> list = (Deque<Symptome>) symptomeRepo.findAll();
-
     @GetMapping("/test")
     public String test(Map<String, Object> model) {
-        //showList(model);
+        Iterable<Symptome> sym = symptomeRepo.findAll();
 
-        //model.put("symptom", list.peek().getSymptome());
+        model.put("symptoms", sym);
         return "test";
     }
 
     @PostMapping()
-    public String addDiagnose(@RequestParam String ok, Map<String, Object> model) {
+    public String go(@RequestParam String ok, Map<String, Object> model) {
 
         return "test";
     }

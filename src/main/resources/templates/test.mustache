@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
-
-    <style>
-        html {
-            background-color: #b0d996;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
 
 </head>
 <body>
-<div>Прсто отвечайте "да" или "нет" на поставленные вопросы</div>
 
 <form method="post">
-    <h2>Беспокоит ли вас {{symptome}}?</h2>
-    <button type="submit" name="yes">Да</button>
-    <button type="submit" name="no">Нет</button>
+    <table border="1">
+        <h3>Выберете беспокоящие вас симптомы</h3>
+        {{#symptoms}}
+        <input type="checkbox" name={{symptome}}>
+        {{symptome}}
+        <br>
+        {{/symptoms}}
+    </table>
+
+    <button type="submit">Отметил</button>
 </form>
 
 <footer>

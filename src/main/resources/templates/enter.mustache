@@ -3,18 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
-
-    <style>
-        html {
-            background-color: #b0d996;
-        }
-
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="/style/enter.css">
 </head>
 <body>
 <h1 align="center">Добавление информации</h1>
-
 
 <div>
     <table border="1">
@@ -26,8 +18,13 @@
         </tr>
         {{/diagnoses}}
     </table>
+    <form method="post">
+        <input type="text" name="text" placeholder="Введите диагноз">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
 
-
+<div>
     <table border="1">
         <h2>Симптномы:</h2>
         {{#symptomes}}
@@ -37,18 +34,13 @@
         </tr>
         {{/symptomes}}
     </table>
-
-    <br>
-    <br>
-
     <form method="post">
         <input type="text" name="sym" placeholder="Введите симптом">
         <button type="submit">Добавить</button>
-
-        <input type="text" name="text" placeholder="Введите диагноз">
-        <button type="submit">Добавить</button>
     </form>
 </div>
+
+
 
 <footer>
     <a href="index">Вернуться на главную</a>

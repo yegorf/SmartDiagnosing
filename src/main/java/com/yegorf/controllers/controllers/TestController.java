@@ -1,68 +1,25 @@
 package com.yegorf.controllers.controllers;
 
 
-import com.yegorf.controllers.enities.Diagnose;
 import com.yegorf.controllers.enities.Symptome;
-import com.yegorf.controllers.repos.DiagnoseRepo;
 import com.yegorf.controllers.repos.SymptomeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Map;
 
 @Controller
+@RequestMapping("test")
 public class TestController {
 
-    @Autowired
-    private DiagnoseRepo diagnoseRepo;
     @Autowired
     private SymptomeRepo symptomeRepo;
 
     @GetMapping
-    public String index(Map<String, Object> model) {
-        return "index";
-    }
-
-    public void showList(Map<String, Object> model) {
-        Iterable<Diagnose> diagnoses = diagnoseRepo.findAll();
-        Iterable<Symptome> symptomes = symptomeRepo.findAll();
-
-        model.put("diagnoses", diagnoses);
-        model.put("symptomes", symptomes);
-    }
-
-    @GetMapping("/enter")
-    public String enter(Map<String, Object> model) {
-        showList(model);
-        return "enter";
-    }
-
-    @PostMapping("/enter")
-    public String addDiagnose(@RequestParam String text, @RequestParam String sym, Map<String, Object> model) {
-
-        if(!text.equals("")) {
-            Diagnose diagnose = new Diagnose(text);
-            diagnoseRepo.save(diagnose);
-
-            showList(model);
-        } else if(!sym.equals("")) {
-            Symptome symptome = new Symptome(sym);
-            symptomeRepo.save(symptome);
-
-            showList(model);
-        } else {
-            showList(model);
-        }
-        return "enter";
-    }
-
-
-    @GetMapping("/test")
     public String test(Map<String, Object> model) {
         Iterable<Symptome> sym = symptomeRepo.findAll();
 
@@ -70,11 +27,13 @@ public class TestController {
         return "test";
     }
 
-    @PostMapping()
-    public String go(@RequestParam String ok, Map<String, Object> model) {
+    @PostMapping
+    public String go(@RequestParam String[] list,
+                     Map<String, Object> model) {
 
+        for (String s : list) {
+            System.out.println(s);
+        }
         return "test";
     }
-
-
 }

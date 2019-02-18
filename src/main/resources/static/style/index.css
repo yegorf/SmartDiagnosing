@@ -20,3 +20,14 @@ a {
     border-bottom:0;
     background:#CEDEFF;
 }
+
+
+#header {
+    background-color: #8bb9ff;
+    height: 200px;
+}
+
+#content {
+    background-color: #D1EDE9;
+    min-height: 500px;
+}

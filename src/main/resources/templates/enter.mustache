@@ -6,45 +6,59 @@
     <link rel="stylesheet" type="text/css" href="/style/enter.css">
 </head>
 <body>
-<h1 align="center">Добавление информации</h1>
 
-<div>
-    <table border="1">
-        <h2>Диагнозы:</h2>
-        {{#diagnoses}}
-        <tr>
-            <td><b>{{id}}</b></td>
-            <td><span>{{diagnose}}</span></td>
-        </tr>
-        {{/diagnoses}}
-    </table>
-    <form method="post">
-        <input type="text" name="text" placeholder="Введите диагноз">
-        <button type="submit">Добавить</button>
-    </form>
+<div id ="wrapper">
+    <div id="header">
+        <h1 align="center">Добавление информации</h1>
+    </div>
+
+    <div class="row">
+    <div id="content">
+        <table border="1">
+            <h2>Диагнозы:</h2>
+            {{#diagnoses}}
+            <tr>
+                <td><b>{{id}}</b></td>
+                <td><span>{{diagnose}}</span></td>
+            </tr>
+            {{/diagnoses}}
+        </table>
+
+        <form method="post">
+            <input type="text" name="text" placeholder="Введите диагноз">
+
+            <h3>Выберете симптомы для этого жиагноза</h3>
+            {{#symptomes}}
+            <input type="checkbox" name="list" value={{symptome}}>
+            {{symptome}}
+            <br>
+            {{/symptomes}}
+
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+
+    <div id="sidebar">
+        <table border="1">
+            <h2>Симптномы:</h2>
+            {{#symptomes}}
+            <tr>
+                <td><b>{{id}}</b></td>
+                <td><span>{{symptome}}</span></td>
+            </tr>
+            {{/symptomes}}
+        </table>
+        <form method="post">
+            <input type="text" name="sym" placeholder="Введите симптом">
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+    </div>
+
+    <div id="footer">
+        <a href="index">Вернуться на главную</a>
+    </div>
 </div>
-
-<div>
-    <table border="1">
-        <h2>Симптномы:</h2>
-        {{#symptomes}}
-        <tr>
-            <td><b>{{id}}</b></td>
-            <td><span>{{symptome}}</span></td>
-        </tr>
-        {{/symptomes}}
-    </table>
-    <form method="post">
-        <input type="text" name="sym" placeholder="Введите симптом">
-        <button type="submit">Добавить</button>
-    </form>
-</div>
-
-
-
-<footer>
-    <a href="index">Вернуться на главную</a>
-</footer>
-
 </body>
 </html>

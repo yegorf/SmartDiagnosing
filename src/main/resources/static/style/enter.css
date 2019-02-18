@@ -1,3 +1,43 @@
 html {
-    background-color: #b0d996;
+    background-color: #DFECEF;
 }
+
+#header {
+    height: 200px;
+    background-color: #3a8ad4;
+    color: #ff987b;
+}
+
+#content {
+    min-height: 500px;
+    background-color: #D4F3CD;
+    width: 50%;
+    float: left;
+    color: wheat;
+}
+
+#sidebar {
+    min-height: 500px;
+    background-color: #8BB9FF;
+    width: 50%;
+    float: left;
+    color: wheat;
+}
+
+#footer {
+    height: 200px;
+    background-color: #3a8ad4;
+}
+
+.row:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.row { display: inline-block; }
+/* start commented backslash hack \*/
+* html .row { height: 1%; }
+.row { display: block; }

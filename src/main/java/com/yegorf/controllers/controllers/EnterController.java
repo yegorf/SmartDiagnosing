@@ -36,11 +36,17 @@ public class EnterController {
         return "enter";
     }
 
-    @PostMapping(params = "text")
-    public String addA(@RequestParam String text, Map<String, Object> model) {
+    @PostMapping(params = {"text", "list"})
+    public String addA(@RequestParam String text,
+                       @RequestParam String[] list,
+                       Map<String, Object> model) {
         Diagnose diagnose = new Diagnose(text);
         diagnoseRepo.save(diagnose);
         showList(model);
+
+        for(String s : list) {
+            System.out.println(s);
+        }
 
         return "enter";
     }

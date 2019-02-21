@@ -1,5 +1,7 @@
 html {
-    background-color: #b0d996;
+    background-color: #DFECEF;
+    color: #1b3b56;
+    font-family: "Lucida Console";
 }
 
 ul {
@@ -21,13 +23,17 @@ a {
     background:#CEDEFF;
 }
 
-
 #header {
-    background-color: #8bb9ff;
+    background-color: #ffcc5c;
     height: 200px;
 }
 
 #content {
-    background-color: #D1EDE9;
+    background-color: #FFEEDD;
     min-height: 500px;
+}
+
+#footer {
+    background-color: #ffcc5c;
+    height: 200px;
 }

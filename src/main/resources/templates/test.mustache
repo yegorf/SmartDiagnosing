@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
-    <link rel="stylesheet" type="text/css" href="/style/test.css">
+    <link rel="stylesheet" type="text/css" href="/style/test_style.css">
 
 </head>
 <body>
 
-<form method="post">
-    <table border="1">
-        <h3>Выберете беспокоящие вас симптомы</h3>
-        {{#symptoms}}
-        <input type="checkbox" name="list" value={{symptome}}>
-        {{symptome}}
-        <br>
-        {{/symptoms}}
-    </table>
+<div id="wrapper">
+    <div id="header">
+        <h1>ПРОЙДИТЕ БЫСТРОЕ ТЕСТИРОВАНИЕ</h1>
+    </div>
 
-    <button type="submit">Отметил</button>
-</form>
+    <div id="content">
+        <form method="post">
+            <table border="1">
+                <h3>Выберете беспокоящие вас симптомы</h3>
+                {{#symptoms}}
+                <input type="checkbox" name="list" value={{symptome}}>
+                {{symptome}}
+                <br>
+                {{/symptoms}}
+            </table>
 
-<footer>
-    <a href="index">Вернуться на главную</a>
-</footer>
+            <button type="submit">Отметил</button>
+        </form>
+    </div>
+
+    <div id="footer">
+        <a href="index">Вернуться на главную</a>
+    </div>
+
+</div>
+
 </body>
 </html>

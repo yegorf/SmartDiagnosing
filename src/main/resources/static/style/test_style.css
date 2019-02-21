@@ -1,0 +1,39 @@
+html {
+    background-color: #DFECEF;
+    color: #1b3b56;
+    font-family: "Lucida Console";
+}
+
+ul {
+    border-bottom:2px solid #000000;
+    margin-left:0;
+    padding:4px 0;
+}
+
+li {
+    display: inline;
+}
+
+a {
+    text-decoration:none;
+    margin-left:3px;
+    border:1px solid #000000;
+    padding: 3px 4px;
+    border-bottom:0;
+    background:#CEDEFF;
+}
+
+#header {
+    background-color: #ffcc5c;
+    height: 200px;
+}
+
+#content {
+    background-color: #FFEEDD;
+    min-height: 500px;
+}
+
+#footer {
+    background-color: #ffcc5c;
+    height: 200px;
+}

@@ -4,29 +4,34 @@ html {
 
 #header {
     height: 200px;
-    background-color: #3a8ad4;
-    color: #ff987b;
+    background-color: #ffcc5c;
+    color: #1b3b56;
+    font-family: "Lucida Console";
 }
 
 #content {
     min-height: 500px;
-    background-color: #D4F3CD;
+    background-color: #FFEEDD;
     width: 50%;
     float: left;
-    color: wheat;
+    color: rgba(0,0,0,0.78);
+    font-family: Calibri;
 }
 
 #sidebar {
     min-height: 500px;
-    background-color: #8BB9FF;
+    background-color: #DFECEF;
     width: 50%;
     float: left;
-    color: wheat;
+    color: rgba(0,0,0,0.78);
+    font-family: Calibri;
 }
 
 #footer {
     height: 200px;
-    background-color: #3a8ad4;
+    background-color: #ffcc5c;
+    color: rgba(199,197,155,0.39);
+    font-family: "Lucida Console";
 }
 
 .row:after {
@@ -38,6 +43,5 @@ html {
     height: 0;
 }
 .row { display: inline-block; }
-/* start commented backslash hack \*/
 * html .row { height: 1%; }
 .row { display: block; }

@@ -3,10 +3,8 @@ package com.yegorf.controllers.enities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,6 +15,9 @@ public class Symptome {
     private Integer id;
 
     private String symptome;
+
+    @OneToMany
+    private Set<Match> matches;
 
     public Symptome(String symptome) {
         this.symptome = symptome;

@@ -25,19 +25,4 @@ public class Match {
         this.symptomeId = symptomeId;
     }
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "diagnose_id")
-//    private Diagnose diagnose;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "symptome_id")
-//    private Symptome symptome;
-
-//    public Match(Diagnose diagnose, Symptome symptome) {
-//        this.diagnose = diagnose;
-//        this.symptome = symptome;
-//    }
-
-//    private Diagnose diagnose;
-
 }

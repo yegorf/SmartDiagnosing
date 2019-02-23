@@ -1,6 +1,7 @@
 package com.yegorf.controllers.controllers;
 
 
+import com.yegorf.controllers.different.JokeParser;
 import com.yegorf.controllers.enities.Diagnose;
 import com.yegorf.controllers.enities.Matches;
 import com.yegorf.controllers.enities.Symptome;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -38,36 +40,34 @@ public class TestController {
 
     @PostMapping
     public String go(@RequestParam String[] list,
-                     Map<String, Object> model) {
+                     Map<String, Object> model) throws IOException {
 
-        int COUNT = list.length;
         int count = 0;
-
+        int COUNT = list.length;
         ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
+        model.put("res", "определить не удалось");
 
         for(Diagnose d : diagnoses) {
             ArrayList<Matches> matches = matchesRepo.findAllByDiagnose(d);
 
             for(Matches m : matches) {
-                System.out.println(m.getDiagnose().getDiagnose() + " " + m.getSymptome().getSymptome());
-                System.out.println();
+                System.out.println(m.getDiagnose().getDiagnose() + " "
+                        + m.getSymptome().getSymptome());
+
                 for(String s : list) {
                     if(s.equals(m.getSymptome().getSymptome())) {
-                        count++;
+                        count ++;
                     }
                 }
             }
-            if(count == COUNT) {
-                //System.out.println("Ваш диагноз - " + d.getDiagnose());
-                //break;
-                model.put("res",d.getDiagnose());
-                return "result";
-            } else {
-               // System.out.println("Мы хз чем вы больны");
-                model.put("res", "idk");
-            }
-        }
+            System.out.println("_______________________________________");
 
+            if (count == COUNT) {
+                model.put("res", d.getDiagnose());
+            }
+            count = 0;
+        }
         return "result";
     }
 }
+

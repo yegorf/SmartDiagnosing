@@ -1,0 +1,17 @@
+html {
+    background-color: #DFECEF;
+}
+
+#result {
+    background-color: #1b3b56;
+    color: rgba(255,152,123,0.78);
+    height: 300px;
+    font-family: "Lucida Console";
+    font-size: 50px;
+}
+
+#recommend {
+    color: #1b3b56;
+    font-family: "Lucida Console";
+    font-size: 50px;
+}

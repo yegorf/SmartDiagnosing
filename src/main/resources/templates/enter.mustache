@@ -14,6 +14,13 @@
 
     <div class="row">
     <div id="content">
+
+        <form method="post">
+            Удалить запись:
+            <input type="text" name="dia" placeholder="id">
+            <button type="submit">Удалить</button>
+        </form>
+
         <table border="1">
             <h2>Диагнозы:</h2>
             {{#diagnoses}}

@@ -1,11 +1,13 @@
 package com.yegorf.controllers.enities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@EqualsAndHashCode(of="id")
 @NoArgsConstructor
 @Entity
 public class Matches {

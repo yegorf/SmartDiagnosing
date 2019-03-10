@@ -2,12 +2,14 @@ package com.yegorf.controllers.enities;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(of="id")
 @Entity
 @NoArgsConstructor
 public class Diagnose {
@@ -17,11 +19,12 @@ public class Diagnose {
 
     private String diagnose;
 
-    @OneToMany
-    private Set<Match> matches;
+    @OneToMany(mappedBy = "diagnose", cascade = CascadeType.ALL)
+    private Set<Matches> matches;
 
     public Diagnose(String diagnose) {
         this.diagnose = diagnose;
     }
+
 }
 

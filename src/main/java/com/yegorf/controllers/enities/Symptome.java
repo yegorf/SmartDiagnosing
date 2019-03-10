@@ -17,7 +17,7 @@ public class Symptome {
     private String symptome;
 
     @OneToMany
-    private Set<Match> matches;
+    private Set<Matches> matches;
 
     public Symptome(String symptome) {
         this.symptome = symptome;

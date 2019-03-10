@@ -64,6 +64,8 @@ public class TestController {
 
             if (count == COUNT) {
                 model.put("res", d.getDiagnose());
+//                JokeParser jokeParser = new JokeParser();
+//                model.put("joke", jokeParser.getJoke());
             }
             count = 0;
         }

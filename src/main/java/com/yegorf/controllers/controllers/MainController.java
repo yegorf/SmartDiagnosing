@@ -12,8 +12,8 @@ import java.util.Map;
 public class MainController {
     @GetMapping
     public String index(Map<String, Object> model) {
-        //LocalDateTime time = LocalDateTime.now();
-        //model.put("time", time.getDayOfMonth() + "." + time.getMonth() + "." + time.getYear());
+        LocalDateTime time = LocalDateTime.now();
+        model.put("time", time.getDayOfMonth() + "." + time.getMonth() + "." + time.getYear());
         return "index";
     }
 }

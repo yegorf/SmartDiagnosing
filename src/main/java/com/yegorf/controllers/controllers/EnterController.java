@@ -42,28 +42,68 @@ public class EnterController {
         return "enter";
     }
 
+    private boolean checkIn(String[] list) {
+        ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
+
+        for(Diagnose d : diagnoses) {
+            ArrayList<Matches> matches = matchesRepo.findAllByDiagnose(d);
+            int count = 0;
+
+            for(String s : list) {
+                for(Matches m : matches) {
+                    if(s.equals(m.getSymptome().getSymptome())) {
+                        count++;
+                    }
+                }
+            }
+
+            if(list.length == count && list.length < matches.size()) {
+                System.out.println("Содержится");
+                return false;
+            }
+            if(list.length == count && list.length > matches.size()) {
+                System.out.println("Содержит");
+                return false;
+            }
+            if(list.length == count && list.length == matches.size()) {
+                System.out.println("Существует");
+                return false;
+            }
+        }
+        return true;
+    }
+
     @PostMapping(params = {"text", "list"})
     public String addA(@RequestParam String text,
                        @RequestParam String[] list,
                        Map<String, Object> model) {
 
-        Diagnose diagnose = new Diagnose(text);
-        diagnoseRepo.save(diagnose);
-        showList(model);
-
-        Matches matches;
-        ArrayList<Symptome> sy = (ArrayList<Symptome>) symptomeRepo.findAll();
-
-        for (String s : list) {
-            for (Symptome symptome : sy) {
-                if(symptome.getSymptome().equals(s)) {
-                    matches = new Matches(diagnose, symptome);
-                    matchesRepo.save(matches);
-                }
-            }
+        boolean check = checkIn(list);
+        if(!check) {
+            model.put("error", "Данный диагноз содержится в другом.");
+            return "error";
         }
 
-        return "enter";
+        if(check) {
+            Diagnose diagnose = new Diagnose(text);
+            diagnoseRepo.save(diagnose);
+            showList(model);
+
+            Matches matches;
+            ArrayList<Symptome> sy = (ArrayList<Symptome>) symptomeRepo.findAll();
+
+            for (String s : list) {
+                for (Symptome symptome : sy) {
+                    if (symptome.getSymptome().equals(s)) {
+                        matches = new Matches(diagnose, symptome);
+                        matchesRepo.save(matches);
+                    }
+                }
+            }
+            return "enter";
+        } else {
+            return "error";
+        }
     }
 
     @PostMapping(params = "sym")
@@ -72,6 +112,18 @@ public class EnterController {
         symptomeRepo.save(symptome);
         showList(model);
 
+        return "enter";
+    }
+
+    @PostMapping(params = "dia")
+    public String deleteDiagnose(@RequestParam String dia) {
+
+        ArrayList<Diagnose> list = (ArrayList<Diagnose>) diagnoseRepo.findAll();
+        for(Diagnose d : list) {
+            if(dia.equals(d.getDiagnose())) {
+                diagnoseRepo.delete(d);
+            }
+        }
         return "enter";
     }
 }

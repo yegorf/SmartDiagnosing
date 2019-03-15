@@ -29,7 +29,6 @@ public class EnterController {
     private MatchesRepo matchesRepo;
 
     private void showList(Map<String, Object> model) {
-        System.out.println("LIST");
         Iterable<Diagnose> diagnoses = diagnoseRepo.findAll();
         Iterable<Symptome> symptomes = symptomeRepo.findAll();
 

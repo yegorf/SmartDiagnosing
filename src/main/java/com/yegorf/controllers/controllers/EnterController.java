@@ -35,6 +35,7 @@ public class EnterController {
         model.put("diagnoses", diagnoses);
         model.put("symptomes", symptomes);
 
+
         System.out.println("kek");
     }
 

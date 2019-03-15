@@ -37,7 +37,7 @@ public class EnterController {
         model.put("symptomes", symptomes);
 
 
-        System.out.println("kek");
+        System.out.println("her");
     }
 
     @GetMapping

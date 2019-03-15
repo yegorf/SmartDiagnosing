@@ -1,7 +1,5 @@
 package com.yegorf.controllers.controllers;
 
-
-import com.yegorf.controllers.different.JokeParser;
 import com.yegorf.controllers.enities.Diagnose;
 import com.yegorf.controllers.enities.Matches;
 import com.yegorf.controllers.enities.Symptome;
@@ -17,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("test")
@@ -49,7 +45,6 @@ public class TestController {
         model.put("res", "определить не удалось");
 
         ArrayList<String> list1 = new ArrayList<>();
-
         ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
         for(Symptome s : symptomes) {
             for(String ss : list) {

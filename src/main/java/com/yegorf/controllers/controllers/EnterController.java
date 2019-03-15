@@ -20,7 +20,6 @@ import java.util.Map;
 @RequestMapping("enter")
 public class EnterController {
 
-
     @Autowired
     private DiagnoseRepo diagnoseRepo;
     @Autowired
@@ -35,9 +34,6 @@ public class EnterController {
 
         model.put("diagnoses", diagnoses);
         model.put("symptomes", symptomes);
-
-
-        System.out.println("her");
     }
 
     @GetMapping
@@ -81,8 +77,6 @@ public class EnterController {
     public String addA(@RequestParam String text,
                        @RequestParam String[] list,
                        Map<String, Object> model) {
-
-
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
         for(Symptome s : symptomes) {
@@ -157,7 +151,6 @@ public class EnterController {
             diagnoseRepo.delete(m.getDiagnose());
         }
         symptomeRepo.delete(symptome);
-
         showList(model);
         return "enter";
     }

@@ -90,12 +90,10 @@ public class EnterController {
         }
 
         boolean check = checkIn(list1);
-        //boolean check = true;
         if(!check) {
             model.put("error", "Конфликт симптомов");
             return "error";
         }
-
         if(check) {
             Diagnose diagnose = new Diagnose(text);
             diagnoseRepo.save(diagnose);
@@ -114,6 +112,7 @@ public class EnterController {
             }
             return "enter";
         } else {
+            System.out.println("dd");
             return "error";
         }
     }
@@ -122,8 +121,8 @@ public class EnterController {
     public String addB(@RequestParam String sym, Map<String, Object> model) {
         Symptome symptome = new Symptome(sym);
         symptomeRepo.save(symptome);
-        showList(model);
 
+        showList(model);
         return "enter";
     }
 

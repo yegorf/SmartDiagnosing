@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("test")
@@ -32,7 +34,7 @@ public class TestController {
 
     @GetMapping
     public String test(Map<String, Object> model) {
-        Iterable<Symptome> sym = symptomeRepo.findAll();
+        ArrayList<Symptome> sym = (ArrayList<Symptome>) symptomeRepo.findAll();
 
         model.put("symptoms", sym);
         return "test";
@@ -43,29 +45,40 @@ public class TestController {
                      Map<String, Object> model) throws IOException {
 
         int count = 0;
-        int COUNT = list.length;
         ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
         model.put("res", "определить не удалось");
+
+        ArrayList<String> list1 = new ArrayList<>();
+
+        ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
+        for(Symptome s : symptomes) {
+            for(String ss : list) {
+                if(Integer.parseInt(ss) == s.getId()) {
+                    list1.add(s.getSymptome());
+                }
+            }
+        }
+        int COUNT = list.length;
+
+        for(String s : list1) {
+            System.out.println(s);
+        }
 
         for(Diagnose d : diagnoses) {
             ArrayList<Matches> matches = matchesRepo.findAllByDiagnose(d);
 
             for(Matches m : matches) {
-                System.out.println(m.getDiagnose().getDiagnose() + " "
-                        + m.getSymptome().getSymptome());
-
-                for(String s : list) {
-                    if(s.equals(m.getSymptome().getSymptome())) {
+                for(String s : list1) {
+                    System.out.println(m.getSymptome().getSymptome());
+                    if(s.equalsIgnoreCase(m.getSymptome().getSymptome())) {
                         count ++;
+                        System.out.println("count++");
                     }
                 }
             }
-            System.out.println("_______________________________________");
 
             if (count == COUNT) {
                 model.put("res", d.getDiagnose());
-//                JokeParser jokeParser = new JokeParser();
-//                model.put("joke", jokeParser.getJoke());
             }
             count = 0;
         }

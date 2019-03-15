@@ -42,7 +42,7 @@ public class EnterController {
         return "enter";
     }
 
-    private boolean checkIn(String[] list) {
+    private boolean checkIn(ArrayList<String> list) {
         ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
 
         for(Diagnose d : diagnoses) {
@@ -57,16 +57,16 @@ public class EnterController {
                 }
             }
 
-            if(list.length == count && list.length < matches.size()) {
+            if(list.size() == count && list.size() < matches.size()) {
                 System.out.println("Содержится");
                 return false;
             }
-            if(list.length == count && list.length > matches.size()) {
-                System.out.println("Содержит");
+            if(list.size() == count && list.size() == matches.size()) {
+                System.out.println("Существует");
                 return false;
             }
-            if(list.length == count && list.length == matches.size()) {
-                System.out.println("Существует");
+            if(matches.size() == count && list.size() > matches.size() && matches!=null) {
+                System.out.println("Содержит");
                 return false;
             }
         }
@@ -78,9 +78,21 @@ public class EnterController {
                        @RequestParam String[] list,
                        Map<String, Object> model) {
 
-        boolean check = checkIn(list);
+
+        ArrayList<String> list1 = new ArrayList<>();
+        ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
+        for(Symptome s : symptomes) {
+            for(String ss : list) {
+                if(s.getId()== Integer.parseInt(ss)) {
+                    list1.add(s.getSymptome());
+                }
+            }
+        }
+
+        boolean check = checkIn(list1);
+        //boolean check = true;
         if(!check) {
-            model.put("error", "Данный диагноз содержится в другом.");
+            model.put("error", "Конфликт симптомов");
             return "error";
         }
 
@@ -92,7 +104,7 @@ public class EnterController {
             Matches matches;
             ArrayList<Symptome> sy = (ArrayList<Symptome>) symptomeRepo.findAll();
 
-            for (String s : list) {
+            for (String s : list1) {
                 for (Symptome symptome : sy) {
                     if (symptome.getSymptome().equals(s)) {
                         matches = new Matches(diagnose, symptome);
@@ -116,7 +128,7 @@ public class EnterController {
     }
 
     @PostMapping(params = "dia")
-    public String deleteDiagnose(@RequestParam String dia) {
+    public String deleteDiagnose(@RequestParam String dia, Map<String, Object> model) {
 
         ArrayList<Diagnose> list = (ArrayList<Diagnose>) diagnoseRepo.findAll();
         for(Diagnose d : list) {
@@ -124,6 +136,27 @@ public class EnterController {
                 diagnoseRepo.delete(d);
             }
         }
+        showList(model);
+        return "enter";
+    }
+
+    @PostMapping(params = "sia")
+    public String deleteSymptom(@RequestParam String sia, Map<String, Object> model) {
+        Symptome symptome = null;
+        ArrayList<Symptome> list = (ArrayList<Symptome>) symptomeRepo.findAll();
+        for(Symptome s : list) {
+            if(s.getSymptome().equals(sia)) {
+                symptome = s;
+            }
+        }
+
+        ArrayList<Matches> matches = matchesRepo.findAllBySymptome(symptome);
+        for(Matches m : matches) {
+            diagnoseRepo.delete(m.getDiagnose());
+        }
+        symptomeRepo.delete(symptome);
+
+        showList(model);
         return "enter";
     }
 }

@@ -36,7 +36,7 @@
 
             <h3>Выберете симптомы для этого жиагноза</h3>
             {{#symptomes}}
-            <input type="checkbox" name="list" value={{symptome}}>
+            <input type="checkbox" name="list" value={{id}}>
             {{symptome}}
             <br>
             {{/symptomes}}
@@ -47,6 +47,12 @@
 
 
     <div id="sidebar">
+        <form method="post">
+            Удалить запись:
+            <input type="text" name="sia" placeholder="id">
+            <button type="submit">Удалить</button>
+        </form>
+
         <table border="1">
             <h2>Симптномы:</h2>
             {{#symptomes}}

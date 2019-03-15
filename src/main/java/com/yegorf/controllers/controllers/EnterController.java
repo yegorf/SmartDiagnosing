@@ -112,7 +112,6 @@ public class EnterController {
             }
             return "enter";
         } else {
-            System.out.println("dd");
             return "error";
         }
     }

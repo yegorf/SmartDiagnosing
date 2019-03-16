@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <title>Info</title>
     <link rel="stylesheet" type="text/css" href="/style/enter_style.css">
+
+    <!--<script scr="/enter.js"></script>-->
 </head>
 <body>
+
+<script>
+    function agree(id) {
+
+        var box = document.getElementById(id);
+        var dov = document.getElementById(id + "a");
+        var ned = document.getElementById(id + "b");
+
+        if(box.checked) {
+            dov.disabled = 0;
+            ned.disabled = 0;
+        } else {
+            dov.disabled = 1;
+            ned.disabled = 1;
+        }
+    }
+</script>
 
 <div id ="wrapper">
     <div id="header">
@@ -36,7 +55,11 @@
 
             <h3>Выберете симптомы для этого жиагноза</h3>
             {{#symptomes}}
-            <input type="checkbox" name="list" value={{id}}>
+                <div id="s">
+                    <input id='{{id}}a' type="range" name="dov" min="0" max="1" step="0.1" value="0" disabled>
+                    <input id='{{id}}b' type="range" name="ned" min="0" max="1" step="0.1" value="0" disabled>
+                    <input id='{{id}}' type="checkbox" name="list" onclick="agree({{id}})" value={{id}} >
+                </div>
             {{symptome}}
             <br>
             {{/symptomes}}

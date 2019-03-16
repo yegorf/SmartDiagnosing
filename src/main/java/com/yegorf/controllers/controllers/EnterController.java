@@ -20,7 +20,6 @@ import java.util.Map;
 @RequestMapping("enter")
 public class EnterController {
 
-
     @Autowired
     private DiagnoseRepo diagnoseRepo;
     @Autowired
@@ -56,7 +55,6 @@ public class EnterController {
                     }
                 }
             }
-
             if(list.size() == count && list.size() < matches.size()) {
                 System.out.println("Содержится");
                 return false;
@@ -73,11 +71,17 @@ public class EnterController {
         return true;
     }
 
-    @PostMapping(params = {"text", "list"})
+    @PostMapping(params = {"text", "list", "dov", "ned"})
     public String addA(@RequestParam String text,
                        @RequestParam String[] list,
+                       @RequestParam Double[] dov,
+                       @RequestParam Double[] ned,
                        Map<String, Object> model) {
 
+        for(Double d : dov)
+        System.out.println(d);
+        for(Double n : ned)
+        System.out.println(n);
 
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
@@ -90,7 +94,7 @@ public class EnterController {
         }
 
         boolean check = checkIn(list1);
-        //boolean check = true;
+
         if(!check) {
             model.put("error", "Конфликт симптомов");
             return "error";

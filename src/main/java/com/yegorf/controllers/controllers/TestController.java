@@ -1,7 +1,6 @@
 package com.yegorf.controllers.controllers;
 
 
-import com.yegorf.controllers.different.JokeParser;
 import com.yegorf.controllers.enities.Diagnose;
 import com.yegorf.controllers.enities.Matches;
 import com.yegorf.controllers.enities.Symptome;

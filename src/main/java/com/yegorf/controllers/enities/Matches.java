@@ -23,8 +23,20 @@ public class Matches {
     @JoinColumn(name = "symptome_id")
     private Symptome symptome;
 
+    private Double dov;
+
+    private Double ned;
+
     public Matches(Diagnose diagnose, Symptome symptome) {
         this.diagnose = diagnose;
         this.symptome = symptome;
+    }
+
+    public Matches(Diagnose diagnose, Symptome symptome,
+                   Double dov, Double ned) {
+        this.diagnose = diagnose;
+        this.symptome = symptome;
+        this.dov = dov;
+        this.ned = ned;
     }
 }

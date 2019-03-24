@@ -1,6 +1,7 @@
 package com.yegorf.controllers.controllers;
 
 
+import com.yegorf.controllers.different.DiagnoseParams;
 import com.yegorf.controllers.enities.Diagnose;
 import com.yegorf.controllers.enities.Matches;
 import com.yegorf.controllers.enities.Symptome;
@@ -16,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("test")
@@ -39,48 +39,59 @@ public class TestController {
         return "test";
     }
 
-    @PostMapping
-    public String go(@RequestParam String[] list,
-                     Map<String, Object> model) throws IOException {
+    public void calculateKoef(DiagnoseParams dp, Matches matches) {
 
-        int count = 0;
-        ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
-        model.put("res", "определить не удалось");
+    }
 
-        ArrayList<String> list1 = new ArrayList<>();
-
+    public ArrayList<DiagnoseParams> testing(ArrayList<Integer> ids) {
+        ArrayList<String> list = new ArrayList<>();
         ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
-        for(Symptome s : symptomes) {
-            for(String ss : list) {
-                if(Integer.parseInt(ss) == s.getId()) {
-                    list1.add(s.getSymptome());
+
+        for(Integer id : ids) {
+            for(Symptome s : symptomes) {
+                if(id == s.getId()) {
+                    list.add(s.getSymptome());
                 }
             }
         }
-        int COUNT = list.length;
 
-        for(String s : list1) {
-            System.out.println(s);
-        }
+        ArrayList<Diagnose> diagnoses = (ArrayList<Diagnose>) diagnoseRepo.findAll();
+        ArrayList<DiagnoseParams> diagnoseParams = new ArrayList<>();
 
         for(Diagnose d : diagnoses) {
             ArrayList<Matches> matches = matchesRepo.findAllByDiagnose(d);
+            double dov = 0.0;
+            double ned = 0.0;
 
             for(Matches m : matches) {
-                for(String s : list1) {
-                    System.out.println(m.getSymptome().getSymptome());
-                    if(s.equalsIgnoreCase(m.getSymptome().getSymptome())) {
-                        count ++;
-                        System.out.println("count++");
+                for(String s : list) {
+                    if(s.equals(m.getSymptome().getSymptome())) {
+                        //dp.setDov(dp.getDov() + m.getDov());
+                        //dp.setNed(dp.getNed() + m.getNed());
+                        dov += (m.getDov() * (1 - dov));
+                        ned += (m.getNed() * (1 - ned));
                     }
                 }
             }
 
-            if (count == COUNT) {
-                model.put("res", d.getDiagnose());
-            }
-            count = 0;
+            DiagnoseParams dp = new DiagnoseParams(d.getDiagnose(), (dov - ned), dov, ned);
+            diagnoseParams.add(dp);
         }
+
+        for(DiagnoseParams dp : diagnoseParams) {
+            System.out.println("Диагноз: " + dp.getDiagnose() + " Коэффициент уверенности:" + dp.getKoef());
+        }
+
+        return diagnoseParams;
+    }
+
+    @PostMapping
+    public String go(@RequestParam Integer[] list,
+                     Map<String, Object> model) throws IOException {
+
+        ArrayList<DiagnoseParams> diagnoseParams = testing(new ArrayList<>(Arrays.asList(list)));
+        model.put("dp", diagnoseParams);
+
         return "result";
     }
 }

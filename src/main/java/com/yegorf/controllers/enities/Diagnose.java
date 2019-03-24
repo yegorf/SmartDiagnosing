@@ -1,6 +1,7 @@
 package com.yegorf.controllers.enities;
 
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -5,11 +5,15 @@
 </header>
 <body>
 
-<div id="recommend">
-Ваш диагноз: {{ res }}
+<div id="content">
+    <ul>
+        {{#dp}}
+            <li>Диагноз: {{diagnose}}. Коэффициент уверенности: {{koef}}</li>
+        {{/dp}}
+    </ul>
 </div>
 
-<div id="content">
+<div id="recommend">
 
 </div>
 

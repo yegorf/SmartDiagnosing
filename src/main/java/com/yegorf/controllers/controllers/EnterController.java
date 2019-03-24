@@ -108,11 +108,14 @@ public class EnterController {
             Matches matches;
             ArrayList<Symptome> sy = (ArrayList<Symptome>) symptomeRepo.findAll();
 
+            int count = 0;
             for (String s : list1) {
                 for (Symptome symptome : sy) {
                     if (symptome.getSymptome().equals(s)) {
-                        matches = new Matches(diagnose, symptome);
+                        matches = new Matches(diagnose, symptome, dov[count], ned[count]);
                         matchesRepo.save(matches);
+
+                        count++;
                     }
                 }
             }

@@ -78,11 +78,6 @@ public class EnterController {
                        @RequestParam Double[] ned,
                        Map<String, Object> model) {
 
-        for(Double d : dov)
-        System.out.println(d);
-        for(Double n : ned)
-        System.out.println(n);
-
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<Symptome> symptomes = (ArrayList<Symptome>) symptomeRepo.findAll();
         for(Symptome s : symptomes) {

@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("test")
@@ -37,10 +35,6 @@ public class TestController {
 
         model.put("symptoms", sym);
         return "test";
-    }
-
-    public void calculateKoef(DiagnoseParams dp, Matches matches) {
-
     }
 
     public ArrayList<DiagnoseParams> testing(ArrayList<Integer> ids) {
@@ -66,8 +60,6 @@ public class TestController {
             for(Matches m : matches) {
                 for(String s : list) {
                     if(s.equals(m.getSymptome().getSymptome())) {
-                        //dp.setDov(dp.getDov() + m.getDov());
-                        //dp.setNed(dp.getNed() + m.getNed());
                         dov += (m.getDov() * (1 - dov));
                         ned += (m.getNed() * (1 - ned));
                     }
@@ -82,13 +74,18 @@ public class TestController {
             System.out.println("Диагноз: " + dp.getDiagnose() + " Коэффициент уверенности:" + dp.getKoef());
         }
 
+        Collections.sort(diagnoseParams, new Comparator<DiagnoseParams>() {
+            @Override
+            public int compare(DiagnoseParams o1, DiagnoseParams o2) {
+                return Double.compare(o2.getKoef(), o1.getKoef());
+            }
+        });
         return diagnoseParams;
     }
 
     @PostMapping
     public String go(@RequestParam Integer[] list,
                      Map<String, Object> model) throws IOException {
-
         ArrayList<DiagnoseParams> diagnoseParams = testing(new ArrayList<>(Arrays.asList(list)));
         model.put("dp", diagnoseParams);
 
